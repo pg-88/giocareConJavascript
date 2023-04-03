@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework</title>
+</head>
+<body onload="avvio()">
+    <header>
+        <h1>
+            Inserisci Immagini
+        </h1>
+        <p>
+            Creare una pagina che permette di inserire i nomi file delle immagini, 
+            visualizzare i nomi inseriti e poi inserire le immagini nella pagina 
+            web. 
+        </p>
+        <h3>
+            requisiti richiesti:
+        </h3>
+        <ul>
+            <li>
+                la pagina html deve essere costruita dinamicamente usando JS
+            </li>
+            <li>
+                si deve presentare inizialmente con un campo input tipo text e il bottone 'inserisci' disattivato
+            </li>
+            <li>
+                il bottone inserimento si attiva quando il campo text viene popolato
+            </li>
+            <li>
+                immagini devono essere in ./img/ non c'è controllo sulla validità dell'input 
+            </li>
+            <li>
+                una volta cliccato il bottone 'inserisci' appare un blocco che contiene la lista di immagini inserite dall'utente
+            </li>
+            <li>
+                la lista contiene elementi unici, non ci possono essere ripetizioni. Se l'utente prova a inserire più volte la stessa immagine deve comparire un errore
+            </li>
+            <li>
+                a fianco della lista ci va un bottone 'visualizza immagini' che fa apparire tutte le immagini
+            </li>
+            <li>
+                visualizza immagini non è attivo se non ci sono elementi in lista
+            </li>
+            <li>
+                cliccando su visualizza immagini le foto devono apparire nella parte inferiore della pagina
+            </li>
+        </ul>
+        <aside id="extra">
+            <h3>
+                Non strettamente richiesti ma opzionali:
+            </h3>
+            <ul>
+                <li>
+                    usare un alert per avvisare l'utente del doppio inserimento in lista
+                </li>
+                <li>
+                    rendere cliccabili i nomi della lista per visualizzarli in una nuova tab
+                </li>
+                <li>
+                    Usare JS per creare e inserire i nuovi elementi HTML anzichè popolare l'innerHTML con stringhe che contengono tag.
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML">MDN insertAdjacentHTML</a>; <a href="https://www.w3schools.com/jsref/met_document_createelement.asp">W3school create and addChild</a>
+                </li>
+            </ul>
+        </aside>
+        <hr>
+    </header>
+    <main id="img-list"></main>
+    
+</body>
+
+
+
+<script>
+    function avvio() {
+        /*Crea gli elementi iniziali della pagina usando innerHTML*/
+        let startBlock = `<input type="text" name="nome-img" id="txt-nome-img" placeholder="inserisci qui il nome dell\'immagine" onchange="attivaBtn()">`
+        startBlock += '<input type="button" value="Inserisci" id="btn-ins" disabled onclick="valoreTxt()">';
+        startBlock += '<ul id="lista"></ul>';
+        startBlock += '<div id="btn-trgt"></div>';
+        startBlock += '<div id="img-trgt"></div>';
+        let immagini = [];
+        document.getElementById("img-list").innerHTML = startBlock;
+        let insBtn = document.getElementById("btn-ins");
+        let insTxt = document.getElementById("txt-nome-img");
+
+        /*Le funzioni dichiarate sotto usano una sintassi diversa da quello che abbiamo fatto finora.
+        Ho dovuto fare cosiì per poter accedere all'array immagini.
+        Le alternative, che io riesco a concepire, sarebbero state:
+            creare una variabile globale (cosa che ci ha spiegato essere meglio non fare)
+            usare un database o file esterno per tenere in memoria i nomi immagini (overkill e non ce lo ha spiegato)
+            far rimbalzare la variabile che contiene l'array tra le chiamate di fz (serve il passaggio di parametri 
+            alle fz sugli eventi che non ci ha ancora spiegato)
+        Questo per dire che sono consapevole di aver usato una sintassi strana ma non ho trovato strade alternative 
+        per rimanere strettamente entro quello che ci ha spiegato finora.
+
+        Detto ciò le funzioni qui sotto sono equivalenti a scrivere onchange="nomeFunzione()" come attributo del 
+        tag html (come avevamo fatto a lezione) però scrivendole dentro la fz avvio() rimango nello scope della variabile immagini.*/
+
+        insTxt.onchange = function (){
+            insBtn.disabled = false;
+            let bv = '<button id="btn-vis" disabled>Visualizza Immagini</button>';
+            
+            document.getElementById("btn-trgt").innerHTML = bv;
+
+        };
+
+        insBtn.onclick = function () {
+            /*Invocata premendo il bottone inserisci*/
+            if(controlloInput(immagini, insTxt.value)){
+                immagini[immagini.length] = insTxt.value;
+                console.log(immagini.length);
+                //ricreo la lista html ogni volta che viene premuto Inserisci
+                let lstImm = '';
+                for(let i=0; i < immagini.length; i++){
+                    lstImm += '<li><a href="' + 'img/'+ immagini[i] +'" target="_blank">' + immagini[i] +' </a></li>';
+                };
+                document.getElementById("lista").innerHTML = lstImm;
+                document.getElementById("btn-vis").disabled = false;
+                insTxt.value = "";
+            }else {
+                window.alert("ATTENZIONE:\nL'immagine immessa è già in lista o stai inserendo una stringa vuota.");
+            }
+            let visBtn = document.getElementById("btn-vis");
+            visBtn.onclick = function () {
+                let strImg = '';
+                for (let i = 0; i < immagini.length; i++){
+                    strImg += '<img src="' + 'img/' + immagini[i] + '" alt="' + immagini[i] + '">';
+                }
+                document.getElementById("img-trgt").innerHTML = strImg;
+            }
+        }
+    }
+
+    function controlloInput(arr, el) {
+        /*controlla se l'elemento è già presente dentro l'array
+
+        ritorna:
+        true se l'elemento può essere inserito 
+        false se è già presente e quindi non può essere inserito*/
+
+        let i = 0;
+        while (i < arr.length){
+            if (el == arr[i] || el == "") {
+                return false;
+            } else {
+                i++;
+            };
+        };
+        return true;
+    };
+</script>
+</html>

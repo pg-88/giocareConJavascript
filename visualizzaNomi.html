@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizza Nomi</title>
+</head>
+<body onload="caricamentoIniziale()">
+    <header>
+
+        <h1>Esercizio Lista Nomi</h1>
+        <p id="consegna">
+            Creare una pagina che inizialmente si presenta solo con un bottone 'Caricamento Nomi' (da creare dinamicamente all'onload)
+        </p>
+    </header>
+    <main id="caricaNomi">
+    </main>
+<aside id="arrayUnico"></aside>
+    <script>
+        function caricamentoIniziale(){
+            /*crea gli elementi iniziali ovvero il bottone e il div target*/
+            let trgt = '<div id="listaNomi"></div>';
+            let btnLoad = '<input type="button" value="Caricamento Nomi" onclick="arrayUnico()">';
+            let aside = 
+            document.getElementById("caricaNomi").innerHTML = trgt + btnLoad; 
+        }
+
+        function caricamentoNomi(){
+            let nomi = ["Tizio", "Caio", "Sempronio", "Maria", "Anna"];
+            let imon = inveriArray(nomi);
+            let list = "";
+
+            for (let i = 0; i < nomi.length; i++){
+                console.log(nomi[i])
+                list += '<p>' + (i+1).toString() + '- ' + nomi[i] + '</p>';
+                console.log(list)
+            }
+
+            for (let i = 0; i < imon.length; i++){
+                console.log(imon[i])
+                list += '<p>' + (imon.length-i).toString() + '- ' + imon[i] + '</p>'
+                console.log(list)
+            }
+            console.log(imon);
+            document.getElementById("listaNomi").innerHTML = list;
+        }
+        
+        function inveriArray(arr){
+            let inv = []
+            for (let i = 0; i < arr.length; i++){
+                inv[(arr.length - 1) - i] = arr[i];
+            }
+            return inv; 
+        }
+
+        function arrayUnico(){
+            let nomi = ["Tizio", "Caio", "Sempronio", "Maria", "Anna"];
+            let str = '';
+            for (let i = 0; i < nomi.length; i++){
+                str += '<p>' + (i+1).toString() + '- ' + nomi[i] + '</p>';
+            }
+            for (let i = nomi.length -1; i >= 0; i--){
+                str += '<p>' + (i+1).toString() + '- ' + nomi[i] + '</p>';
+            }
+            document.getElementById("arrayUnico").innerHTML
+        }
+    </script>
+</body>
+</html>

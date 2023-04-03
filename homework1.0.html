@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soluzione alternativa</title>
+</head>
+<body>
+    <header>
+        <h1>
+            Soluzione con InputFile
+        </h1>
+        <p>
+            sto provando a ricreare le stesse funzionalità gestendo l'input dei file e usando la DOM anzichè le stringhe con i tag.
+        </p>
+    </header>
+    
+</body>
+<script>
+    document.body.onload = () => {
+
+        //creo main con id sel-img
+        let main = document.createElement("main");
+        main.id = "sel-img";
+        
+        //creo input file accetta multipli e solo immagini
+        let inFile = document.createElement("input");
+        inFile.type = "file";
+        inFile.id = "in-file";
+        inFile.title = "Seleziona immagini";
+        inFile.multiple = true;
+        inFile.accept = "image/*";
+        //metodo che aggancia la funzione handleFile() all'evento change dell'elemento input
+        inFile.addEventListener("change", handleFile);
+        
+        
+        //aggancio gli elementi al DOM
+        document.body.appendChild(main);
+        main.appendChild(inFile);
+        inFile.insertAdjacentHTML("beforebegin", 
+            '<label for="">Inserisci le immagini che vuoi visualizzare nella pagina</label>');
+    };
+
+    function handleFile(e){
+
+        //console.log(event); //event rappresenta l'evento a cui si riferisce il listener
+        //posso dargli un alias passando un nome come parametro della fz
+        //di solito si usa 'e'
+        //console.log(e);// stesso output di 'console.log(event);'
+
+        
+        //controllo se c'è il target per le immagini sennò lo creo 
+        if(! document.getElementById("trgt-img")){
+            let trgt = document.createElement("div");
+            trgt.id = "trgt-img";
+            //inserisco il target subito dopo l'input inserisci files
+            document.getElementById("in-file").insertAdjacentElement("afterEnd", trgt);
+        }
+        
+        let arr = e.target.files;
+        //array per i files. Si poteva usare anche this.files
+        //console.log("Si poteva usare anche this.files: ",this.files);
+        
+        //ciclo per leggere i files come stringa (URL) binaria
+        //
+        for (let i = 0; i < arr.length; i++) {
+            let reader = new FileReader();
+            reader.addEventListener("load", readerLoad);
+            reader.readAsDataURL(arr[i]);
+        }
+    }
+
+    function readerLoad(){
+        /*al caricamento di reader, genera un elemento img e lo inserisce nel div target */
+        //console.log("this.target.result: ",this.result);
+        let src = this.result;
+        let img = document.createElement("img");
+        img.src = src;
+        document.getElementById("trgt-img").appendChild(img);
+    }
+
+</script>
+</html>

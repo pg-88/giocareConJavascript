@@ -9,6 +9,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+./img/*
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -348,3 +349,12 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+img/Gallina.png
+.gitignore
+img/green_portal.jpg
+img/office.jpeg
+img/PI.jpg
+img/pickle_rick.png
+img/reset.jpg
+.gitignore
+img/Uova.png

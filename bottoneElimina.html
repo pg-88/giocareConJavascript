@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bottone Elimina</title>
+</head>
+<body onload="avvio()">
+    <main id="maincontent">
+
+    </main>
+    
+</body>
+<script>
+function avvio(){
+    let iniBlock = '<input type="text" name="percorsi" id="in-txt" onchange="controllaArray()">';
+    iniBlock += '<button disabled="disabled" id="ins-btn" onclick="inserisciLista()">Inserisci</button>';
+    iniBlock += '<ul id="trgt-lst"></ul>';
+    iniBlock += '<button disabled="disabled" id="vis-img-btn" onclick="inserisciImmagini()">Visualizza Immagini</button>';
+    iniBlock += '<button id="pop-btn" onclick="togliUltimo()" disabled>Elimina Ultimo</button>'
+    iniBlock += '<div id="trgt-img"></div>'
+    document.getElementById("maincontent").innerHTML = iniBlock;
+}
+var immagini = [];
+
+
+function controllaArray(){
+    /*Controlla il valore dell'input per vedere se è già presente nell'array
+    Se non è stringa vuota e non è già presente, viene introdotto
+    
+    Usando il metodo str.toLowerCase() mi da errore per le immagini che
+    iniziano con la maiuscola.*/
+    let elemento = document.getElementById("in-txt").value;
+    if(immagini.includes(elemento) || elemento == ''){
+        window.alert("Ho detto NO!");
+    }else {
+        immagini.push(elemento);
+        document.getElementById("ins-btn").disabled = false;
+    }
+}
+
+function inserisciLista(){
+    /*Prende i valori dentro all'array e crea la lista html
+    ogni volta che viene cliccato 'Inserisci' si genera la lista ripescando
+    tutti gli elementi dell'array.
+
+    Effetti collaterali:
+    attiva bottone visualizza Immagine,
+    attiva bottone elimina ultimo,
+    disattiva bottone inserisci dopo aver vuotato il campo input*/
+
+    let inText = document.getElementById("in-txt");
+    let lst = document.getElementById("trgt-lst");
+    let innerLst = '';
+
+    for (let i = 0; i < immagini.length; i++){
+        //id sugli li possono essere utili per funzionalità più complicate
+        innerLst += '<li id="'+'li-'+ i +'"><a href="'+ './img/'+ immagini[i] + '" target="_blank" rel="noopener noreferrer">' + immagini[i] +'</a></li>';
+    }
+
+    lst.innerHTML = innerLst;
+
+    inText.value = "";
+    document.getElementById("ins-btn").disabled = true;
+    document.getElementById("vis-img-btn").disabled = false;
+    document.getElementById("pop-btn").disabled = false;
+}
+
+function inserisciImmagini(){
+    /*Sul click a visualizza passo la stringa coi tag img al div target*/
+    let innerImg = '';
+    let target = document.getElementById("trgt-img");
+    for(let i= 0; i<immagini.length; i++){
+        innerImg += '<img src="'+ './img/'+ immagini[i] + '" alt="' + immagini[i] +'" height="200" width="200">';
+    }
+    target.innerHTML = innerImg;
+}
+
+function arrayVuoto(){
+    /*Torna vero se l'array è vuoto*/
+    return (immagini.length == 0);
+}
+
+function togliUltimo(){
+    /*controlla che immagini sia popolato
+    elimina gli elementi da immagini con il metodo pop
+    anzichè eliminare parti della lista HTML e tag img li ricrea 
+    usando il nuovo array dopo il pop*/
+
+    if (! arrayVuoto()){
+        let eliminato = immagini.pop()//accorcio l'array e recupero l'eliminato
+        window.confirm("Hai eliminato " + eliminato + ".");
+        inserisciLista();//ricreo la lista 
+
+        //ricreo le immagini solo se erano già state visualizzate
+        if(document.getElementById("trgt-img").innerHTML != "") inserisciImmagini();
+        
+    } else {
+        window.alert("Non ci sono più elementi in lista")
+    }
+}
+
+</script>
+</html>

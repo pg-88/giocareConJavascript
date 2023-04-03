@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soluzione in classe</title>
+</head>
+<body onload="avvio()">
+    <header><div id="pre"></div></header>
+    <main id="maincontent">
+
+    </main>
+    
+</body>
+<script>
+function avvio(){
+    let iniBlock = '<input type="text" name="percorsi" id="in-txt" onchange="controllaInput()">';
+    iniBlock += '<button disabled="disabled" id="ins-btn" onclick="inserisciLista()">Inserisci</button>';
+    iniBlock += '<ul id="trgt-lst"></ul>';
+    iniBlock += '<button disabled="disabled" id="vis-img-btn" onclick="inserisciImmagini()">Visualizza Immagini</button>';
+    iniBlock += '<div id="trgt-img"></div>'
+    document.getElementById("maincontent").innerHTML = iniBlock;
+}
+var immagini = [];
+
+// function controllaArray(elemento){
+//     /*ciclo while per leggere l'array
+//     funzione ritorna un bool:
+//     true se posso inserire
+//     false se str vuota o già presente quindi non inserisco*/
+//     let i = 0;
+//     while(i < immagini.length){
+//         if(immagini[i] == elemento || immagini[i] == ''){
+//             return false;
+//         }else {
+//             i++;
+//         }
+//     }
+//     return true;
+// }
+function controllaArray(elemento){
+    if(immagini.includes(elemento) || elemento == ''){
+        window.alert("Ho detto NO!");
+    }else {
+        immagini.push(elemento);
+        document.getElementById("ins-btn").disabled = false;
+    }
+}
+
+function controllaInput(){
+    /*sul change di in-txt controlla il value e attiva il bottone visualizza immagini*/
+    let inserito = document.getElementById("in-txt");
+    let btnIns = document.getElementById("ins-btn");
+
+    controllaArray(inserito.value);
+}
+
+function inserisciLista(){
+    /*Prende i valori dentro all'array e crea la lista html
+    ogni volta che viene cliccato 'Inserisci' si genera la lista con tutti gli elementi dell'array
+    Effetto collaterale: crea il div target immagini e attiva bottone visualizza Immagine*/
+    let inText = document.getElementById("in-txt");
+    //immagini[immagini.length] = inText.value;
+    let lst = document.getElementById("trgt-lst");
+    let innerLst = '';
+    for (let i = 0; i < immagini.length; i++){
+        innerLst += '<li id="'+'li-'+ i +'"><a href="'+ './img/'+ immagini[i] + '" target="_blank" rel="noopener noreferrer">' + immagini[i] +'</a>'; 
+        innerLst += '<button onclick="vedi('+ i + ')">V</button> <button onclick="rimuovi('+ i +')">X</button></li>';
+    }
+    lst.innerHTML = innerLst;
+    inText.value = "";
+    document.getElementById("ins-btn").disabled = true;
+    document.getElementById("vis-img-btn").disabled = false;
+}
+
+function vedi(index){
+    /*mostra una piccola anteprima di un'immagine alla volta*/
+    console.log(document.getElementById("pre"));
+    let preview = document.getElementById("pre");
+    let thumbnail = '<img id="preview" src="img/' + immagini[index] + '" heigth="80" width="80">';
+    preview.innerHTML = thumbnail;
+}
+
+
+function rimuovi(index){
+    let li = document.getElementById("li-"+index);
+    console.log(li);
+    li.remove();
+    immagini.splice(index)
+    console.log(immagini);
+    document.getElementById("pre").innerHTML = '';
+
+    if(document.getElementById("trgt-lst").innerHTML == ''){
+        console.log("true", document.getElementById("trgt-lst").innerHTML);
+        document.getElementById("vis-img-btn").disabled = true;
+    }else {
+        console.log("false", document.getElementById("trgt-lst").innerHTML);
+        document.getElementById("vis-img-btn").disabled = false;
+    }
+    console.log(immagini);
+}
+
+function inserisciImmagini(){
+
+    let innerImg = '';
+    for(let i= 0; i<immagini.length; i++){
+        innerImg += '<img src="'+ './img/'+ immagini[i] + '" alt="' + immagini[i] +'" height="200" width="200">';
+    }
+    target.innerHTML = innerImg;
+}
+
+
+</script>
+</html>
