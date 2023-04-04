@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marted&iacute; 04 aprile - appunti</title>
+</head>
+<body>
+    <header>
+        <h1></h1>
+        <section>
+            Solitamente il codice js non sta nello stesso file dell'html
+            Associare l'esecuzione delle fz a un evento di un'interfaccia è uno dei comportamenti 
+            più sfruttati nella programmazione JS. <br>
+        </section>
+    </header>
+    <main>
+        <article id="fz-avanzate">
+            <h3>
+                Le funzioni
+            </h3>
+            <section>
+                Le fz possono prendere in input dei parametri che sono passati tra parentesi dopo l'invocazione della stessa, 
+                e possono avere un return che ritorna un valore. <wbr/>
+                Quando non c'è il return esplicito in realtà ritorna una parola chiave che rappresenta nulla.
+                Quando le funzioni hanno un return posso assegnare il risultato di una fz a una variabile
+            </section>
+            <h3>
+                Chiamate di funzioni con parametri
+            </h3>
+            <section>
+                Il passaggio dei parametri è un assegnamento, quindi bisogna rispettare l'ordine dei parametri 
+                per evitare problemi. <wbr/>
+                Esempio: <br/>
+                funzione frazione( numeratore, denominatore) ritorna numeratore fratto denominatore. <br/>
+                chiamata frazione(1,2) -> 1/2 <br/>
+                se provo a chiamare la funzione con 0 al numeratore la frazione diventa 0 qualsiasi sia il 
+                denominatore, però se inverto l'ordine dei parametri deve dare errore! <br/>
+                chiamata frazione( 0, 5) -> 0 <br/>
+                chiamata frazione( 5, 0) -> errore; l'ordine conta! <br/>
+            </section>
+        </article>
+        <hr/>
+    </main>
+    <article id="esempi">
+        <h3>
+            esempi<br/>
+        </h3>
+        <section id="fz-somma">
+            il bottone Somma richiama la funzione calcola() senza parametri e senza ritorno, che contiene 2 
+            variabili, v1=10 e v2=20, una chiamata di somma() che prende 2 parametri e ritorna la loro somma.<br/>
+            Per poter visualizzare nella pagina il risultato dovrei intercettare il valore di return di somma dentro alla
+            fz calcola e creare un elemento su cui inserire il valore.<br><br>
+            <div id="target"><p>qui c'è il target, però se fai la somma divento un box col risultato!</p></div>
+            
+            <button id="somma-btn" onclick="calcola()">Somma</button>
+        </section>
+        <hr/>
+        <section id="mio-esempio">
+            Provo a costruire una funzione che crea frazioni e operazioni sulle frazioni
+            <br>
+            <label for="num">Numeratore</label>
+            <input type="text" name="numeratore" id="num-in" placeholder="numeratore" size="3">
+
+            <label for="denum">Denumeratore</label>
+            <input type="text" name="denumeratore" id="denum-in" placeholder="denumeratore" size="3">
+            <button id="frac-btn" onclick="creaFrac()">Frazione</button>
+            <br>
+            <div id="frac-trgt"></div>
+        </section>
+    </article>
+    <article id="switch">
+        <h3>Switch</h3>
+        <section>
+            permette di operare una scelta tra diversi casi, permette di definire un default e usare il break.
+            Si possono introdurre n casi. La sintassi è: <br>
+<pre>
+switch(nome_variabile){
+    case valore_assunto_var:
+        operazione_da_compiere;
+    case valore_alternativo:
+        operazione_alternativa;
+        . 
+        . 
+        .
+    default:
+        esegue_quando_nessuno_cioncide;
+    }
+        </pre>
+        Switch è intercambiabile con una serie di if/else o if/else if
+        </section>
+    </article>
+    <article id="passaggio-param-evento">
+        <h3>Passaggio di parametri </h3>
+        <section>
+            Il passaggio dei parametri può essere fatto anche quando invochiamo le funzioni in concomitanza degli eventi. 
+            Queste funzioni però non permettono un return quindi la uso per recepire i parametri, se poi ho bisogno di un 
+            return devo invocarla in un'altra funzione.<br/>
+            <strong>N.B. Quando la variabile passata alla funzione è un array o comunque un oggetto il passaggio avviene 
+                per riferimento quando è un intero il passaggio avviene per valore.
+            </strong>
+        </section>
+        <div id="array-trgt">
+            <label for="passaggio-array">Attiva la console!</label>
+            <button id="passaggio-array" onclick="modificaArray(9)">Passaggio Array per Riferimento</button>
+            <br>
+            <label for="valore-array">Attiva la console!</label>
+            <button id="valore-array" onclick="modificaValore(9)">Passaggio Array senza modificare l'originale</button>
+        </div>
+        <br>
+        <section id="passaggio-stringhe">
+            Quello che mi chiedo è il comportamento delle stringhe nel passaggio in una fz. Infatti le stringhe possono 
+            anche essere istanziate come oggetto con il <code>new String()</code>
+        </section>
+        <div id="str-trgt">
+            <button id="passaggio-stringhe" onclick="modificaStringa()">Passaggio Stringa</button>
+        </div>
+    </article>
+</body>
+<script>
+    
+    function somma(addendo1, addendo2){
+        return addendo1 + addendo2;
+    }
+
+    function calcola(){
+        /*invocando la fz somma calcola v1 + v2*/
+        let v1 = 10;
+        let v2 = 20;
+        let result = somma(v1, v2);
+        console.log(result, somma);
+        document.getElementById("target").innerHTML = '<input type="text" name="result" id="out-somma" value="'+ result +'" size="5">';
+    }
+
+    function creaFrac(){
+        let n = document.getElementById("num-in");
+        let d = document.getElementById("denum-in");
+        console.log(n.value, d.value);
+        visualizzaFrac(n.value,d.value);
+    }
+
+    // function visualizzaFrac(num, denom){
+    //     /*non è molto utile perché */
+    //     let innerFrac = '';ui c'è il target, però se fai lavalFrac(' + num + ', ' + denom + ')"> <sup>' + num + '</sup>';
+    //     innerFrac += '<sub>' + denom + '</sub></button></h3>';
+    //     elFrac.innerHTML = innerFrac;
+    // } //la rifaccio meglio qui sotto -| 
+
+    function visualizzaFrac(num, denom){
+        if (denom != 0){
+            //crea elemento bottone per la frazione
+            let frac = document.createElement("button");
+            frac.id = "frac" + num + "-" + console.log(num,denom);
+            window.alert("Errore matematico:\nDivisione per 0");
+        }
+    }
+
+    function evalFrac(n, d){
+        console.log(n/d);
+        let f = document.getElementById("frac" + n + "-" + d);
+        return (n/d);
+    }
+
+    function modificaArray(el){
+        let numeri = [1,2,3,4,5,6,7,8];
+        console.log('prima della chiamata inserisciAllaFine(el, numeri)'+numeri+'\n');
+        //document.getElementById("array-trgt").append('prima della chiamata inserisciAllaFine(el, numeri) l\'array originale è: ' +numeri+'\n');
+        inserisciAllaFine(el, numeri); //nella funzione il parametro num prende il VALORE di el 
+        //mentre per numeri viene passato il riferimento, ovvero l'indirizzo di memoria dove sta l'array 
+        //document.getElementById("array-trgt").append('dopo la chiamata inserisciAllaFine(el, numeri)'+ numeri + '\n'); //tolti per non sporcare la pagina
+        console.log('dopo la chiamata inserisciAllaFine(el, numeri) l\'array è diventato'+ numeri + '\n')
+        //numeri è cambiata senza che abbia mai fatto direttamente accesso all'array in questa fz 
+        //è cambiata per le operazioni di inserisciAllaFine che ha agito sul RIFERIMENTO della variabile
+        console.log(el, "la variabile 'el' è stata passata per valore; quindi anche il se VALORE viene" +
+            "incrementato in inserisciAllaFine, il suo valore in questa fz (modificaArray) non è mutato");
+    }
+
+    function modificaValore(){
+        let numeri = [1,2,3,4,5,6,7,8];
+        console.log("Numeri prima della chiamata della funzione: ", numeri);
+        let nuovoArray = indiciPari(numeri);
+        console.log("Numeri dopo la chiamata della funzione: ", numeri);
+        console.log("Ora esiste un'altro array, nuovo Array: ", nuovoArray);
+        let nuovoArray1 = indiciDispari(numeri);
+        console.log("Dopo l'invocazione di indiciDispari(numeri), numeri è ancora: ", numeri);
+        console.log(" pero ora esiste anche: ", nuovoArray1 )
+    }
+
+    function indiciPari(arr){
+        let pari = [];
+        let j = 0;//inizializzo l'indice dell'array 'pari'
+        for (let i = 0; i < arr.length; i+=2){
+            //i incrementa di 2 quindi cicla tutti i valori pari
+            pari[j] = arr[i];//assegno a ogni indice della lista pari, solo gli elementi con indici pari della lista arr
+            j++; //incrementa di uno alla volta
+        }
+        return pari;
+    }
+
+    function indiciDispari(arr){
+        /*Si può anche fare imponendo una condizione all'interno del ciclo*/
+        let dispari = [];
+        let j = 0;
+        for(let i = 0; i < arr.length; i++){
+            console.log("% è l'operatore modulo ovvero il resto della divisione intera."
+            +"se il resto della divisione per 2 è diverso da 0 il numero è dispari",i,"i%2", i%2);
+            if(i % 2 != 0){
+                dispari[j] = arr[i]
+                j++;//incremento j solo quando avviene l'assegnamento
+            }
+            //se metto qui l'incremento di j mi vengono i buchi.
+        }
+        return dispari;
+
+    }
+
+    function inserisciAllaFine(num, arr){
+        //numero è il chiamante ha il VALORE di el visto 
+        arr[arr.length] = num;
+        num++;
+    }
+    
+</script>
+</html>

@@ -22,7 +22,7 @@ function avvio(){
     iniBlock += '<div id="trgt-img"></div>'
     document.getElementById("maincontent").innerHTML = iniBlock;
 }
-var immagini = [];
+var immagini = ["1","2","3","4","5","6"];
 
 // function controllaArray(elemento){
 //     /*ciclo while per leggere l'array
@@ -76,7 +76,7 @@ function inserisciLista(){
 
 function vedi(index){
     /*mostra una piccola anteprima di un'immagine alla volta*/
-    console.log(document.getElementById("pre"));
+    //console.log(document.getElementById("pre"));
     let preview = document.getElementById("pre");
     let thumbnail = '<img id="preview" src="img/' + immagini[index] + '" heigth="80" width="80">';
     preview.innerHTML = thumbnail;
@@ -84,11 +84,12 @@ function vedi(index){
 
 
 function rimuovi(index){
-    let li = document.getElementById("li-"+index);
-    console.log(li);
-    li.remove();
-    immagini.splice(index)
-    console.log(immagini);
+    let li = document.getElementById("li-"+index);//richiama il tag html
+    //console.log(li);
+    li.remove();//elimina il tag html
+    immagini.slice(index + 1);
+    //modifica array
+    console.log("immagini slice",immagini.slice(index + 1));
     document.getElementById("pre").innerHTML = '';
 
     if(document.getElementById("trgt-lst").innerHTML == ''){

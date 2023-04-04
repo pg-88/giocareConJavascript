@@ -8,6 +8,7 @@ Esercizi fatti a lezione e vaneggiamenti personali...
   - [Soluzione A Lezione](#soluzione-a-lezione)
   - [Bottone Elimina](#bottone-elimina)
   - [Bottoni nella lista](#bottoni-nella-lista)
+  - [Appunti martedì 4 aprile](#appunti-martedì-4-aprile)
 ----
 ### Esercizio ven 31 marzo
 
@@ -34,5 +35,11 @@ Esercizi fatti a lezione e vaneggiamenti personali...
 ----
 ----
 ### Bottoni nella lista
-- [bottoniinlista](bottoniInLista.html) work in progress.... 
+- [bottoniinlista](bottoniInLista.html) work in progress.....
+
+### Appunti martedì 4 aprile
+**Ricorda: **
+- verifica *seria* mercoledì 12 aprile
+- per lo stage inviare ad Elia su Whatsapp no mail le aziende di interesse o rispondere al sondaggio sul gruppo.
+[appunti e codice a lezione](mar04apr.html)
  
