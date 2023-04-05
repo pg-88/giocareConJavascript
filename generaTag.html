@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore Tag HTML</title>
+</head>
+<body onload="avvio()">
+    <main>
+<fieldset>
+<legend>Crea tag per html</legend>
+<select name="tag-name" id="sel-tag">
+<option value="null">Scegli un elemento</option>
+<option value="p">paragrafo</option>
+<option value="img">immagine</option>
+<option value="ul">lista bulletpoint</option>
+<option value="ol">lista numerata</option>
+<option value="article">articolo</option>
+<option value="section">sezione</option>
+<option value="strong">testo importante</option>
+<option value="em">testo enfatizzato</option>
+<option value="input:txt">Casella input di testo</option>
+<option value="button">Bottone</option>
+</select>
+</fieldset>
+    </main>
+</body>
+<script>
+    function avvio(){
+        /*crea il fieldset */
+        let iniBlock = '';
+        iniBlock += '<fieldset>';
+        iniBlock += '<legend>';
+        iniBlock += 'Crea tag per html';
+        iniBlock += '</legend>';
+        iniBlock += '<select name="tag-name" id="sel-tag" onchange="printTag()">';
+        iniBlock += '<option value="null" selected>Scegli un elemento</option>';
+        iniBlock += '<option value="p">paragrafo</option>';
+        iniBlock += '<option value="img">immagine</option>'+
+        '<option value="ul">lista bulletpoint</option>'+
+        '<option value="ol">lista numerata</option>' + 
+        '<option value="article">articolo</option>' + 
+        '<option value="section">sezione</option>'+
+        '<option value="strong">testo importante</option>'+
+        '<option value="em">testo enfatizzato</option>'+
+        '<option value="input:txt">Casella input di testo</option>'+
+        '<option value="button">Bottone</option>'
+        iniBlock += '</select>';
+        iniBlock += '</fieldset>';
+
+        let m = document.getElementsByTagName('main'); //IL MAIN È UNO SOLO
+        m[0].innerHTML = iniBlock;
+    }
+
+    function getSelectedTag(){
+        /*switch case per richiamare la funzione giusta per ogni tag.*/
+        //console.log(document.getElementById('sel-tag').value);
+        let tag = document.getElementById('sel-tag').value;
+        switch(tag){
+            case('p'):
+            paragrafo();
+            break;
+            case('img'):
+            immagine();
+            break;
+            case('ul'):
+        }
+    }
+
+    function printTag(){
+        /**/
+        console.log(getSelectedTag());
+    }
+
+</script>
+</html>
