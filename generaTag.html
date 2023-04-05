@@ -8,22 +8,6 @@
 </head>
 <body onload="avvio()">
     <main>
-<fieldset>
-<legend>Crea tag per html</legend>
-<select name="tag-name" id="sel-tag">
-<option value="null">Scegli un elemento</option>
-<option value="p">paragrafo</option>
-<option value="img">immagine</option>
-<option value="ul">lista bulletpoint</option>
-<option value="ol">lista numerata</option>
-<option value="article">articolo</option>
-<option value="section">sezione</option>
-<option value="strong">testo importante</option>
-<option value="em">testo enfatizzato</option>
-<option value="input:txt">Casella input di testo</option>
-<option value="button">Bottone</option>
-</select>
-</fieldset>
     </main>
 </body>
 <script>
@@ -54,17 +38,44 @@
     }
 
     function getSelectedTag(){
-        /*switch case per richiamare la funzione giusta per ogni tag.*/
+        /*switch case per richiamare la funzione giusta per ogni tag.
+        
+        prende il valore passato dal selection e lo passa usa in switch*/
         //console.log(document.getElementById('sel-tag').value);
         let tag = document.getElementById('sel-tag').value;
         switch(tag){
             case('p'):
-            paragrafo();
+            testo('p');
             break;
             case('img'):
             immagine();
             break;
             case('ul'):
+            lista('ul');
+            break;
+            case('ol'):
+            lista('ol');
+            break;
+            case('article'):
+            testo('article');
+            break;
+            case('section'):
+            testo('section');
+            break;
+            case('strong'):
+            testo('strong');
+            break;
+            case('em'):
+            testo('em');
+            break;
+            case('input:txt'):
+            input('input:txt');
+            break;
+            case('button'):
+            bottone('button');
+            break;
+            default:
+                window.alert("La selezione non è valida\nScegli uno degli elementi da generare");
         }
     }
 
