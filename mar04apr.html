@@ -114,7 +114,7 @@ switch(nome_variabile){
             anche essere istanziate come oggetto con il <code>new String()</code>
         </section>
         <div id="str-trgt">
-            <button id="passaggio-stringhe" onclick="modificaStringa()">Passaggio Stringa</button>
+            <button id="passaggio-stringhe" onclick="modificaStringa('ciao')">Passaggio Stringa COSTANTE</button>
         </div>
     </article>
 </body>
@@ -197,6 +197,12 @@ switch(nome_variabile){
         }
         return pari;
     }
+    
+    function inserisciAllaFine(num, arr){
+        //numero è il chiamante ha il VALORE di el visto 
+        arr[arr.length] = num;
+        num++;
+    }
 
     function indiciDispari(arr){
         /*Si può anche fare imponendo una condizione all'interno del ciclo*/
@@ -212,14 +218,26 @@ switch(nome_variabile){
             //se metto qui l'incremento di j mi vengono i buchi.
         }
         return dispari;
-
     }
 
-    function inserisciAllaFine(num, arr){
-        //numero è il chiamante ha il VALORE di el visto 
-        arr[arr.length] = num;
-        num++;
+    function modificaStringa(str){
+        let strWeb = str;
+        console.log('come è arrrivata dalla pagina web: ',strWeb);
+        let vocali = ['a','e','i','o','u'];
+        let v = 0;
+        for(let i in strWeb){
+            if(vocali.includes(strWeb[i].toLowerCase())){
+                v++;
+                console.log(i, strWeb[i]);
+            }
+        }
+        strWeb = 'la stringa originale contiene ' +
+                 v.toString() + ' vocali' + ' e ' + 
+                 (str.length - v).toString() + ' consonanti!';
+
+        console.log('stringa in uscita dalla funzione: ', strWeb);
     }
+
     
 </script>
 </html>
