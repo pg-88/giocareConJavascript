@@ -39,7 +39,7 @@ Esercizi fatti a lezione e vaneggiamenti personali...
 - [bottoniinlista](bottoniInLista.html) work in progress.....
 ----
 ### Appunti martedì 4 aprile
-**Ricorda: **
+**Ricorda:**
 - verifica *seria* mercoledì 12 aprile
 - per lo stage inviare ad Elia su Whatsapp no mail le aziende di interesse o rispondere al sondaggio sul gruppo.
   

@@ -10,6 +10,7 @@
     <main>
     </main>
 </body>
+
 <script>
     function avvio(){
         /*crea il fieldset */
@@ -18,9 +19,10 @@
         iniBlock += '<legend>';
         iniBlock += 'Crea tag per html';
         iniBlock += '</legend>';
-        iniBlock += '<select name="tag-name" id="sel-tag" onchange="printTag()">';
+        iniBlock += '<select name="tag-name" id="sel-tag" onchange="getSelectedTag()">';
         iniBlock += '<option value="null" selected>Scegli un elemento</option>';
         iniBlock += '<option value="p">paragrafo</option>';
+        iniBlock += '<option value="h">titolo</option>';
         iniBlock += '<option value="img">immagine</option>'+
         '<option value="ul">lista bulletpoint</option>'+
         '<option value="ol">lista numerata</option>' + 
@@ -28,10 +30,13 @@
         '<option value="section">sezione</option>'+
         '<option value="strong">testo importante</option>'+
         '<option value="em">testo enfatizzato</option>'+
-        '<option value="input:txt">Casella input di testo</option>'+
+        '<option value="input">Casella input di testo</option>'+
         '<option value="button">Bottone</option>'
         iniBlock += '</select>';
         iniBlock += '</fieldset>';
+        
+        //aggiungo il target per il form di introduzione elementi per i tag
+        iniBlock += '<div id="form-trgt"></div>';
 
         let m = document.getElementsByTagName('main'); //IL MAIN È UNO SOLO
         m[0].innerHTML = iniBlock;
@@ -47,42 +52,180 @@
             case('p'):
             testo('p');
             break;
+
+            case('h'):
+            testo('h');
+            break;
+            
             case('img'):
             immagine();
             break;
+            
             case('ul'):
             lista('ul');
             break;
+            
             case('ol'):
             lista('ol');
             break;
+            
             case('article'):
             testo('article');
             break;
+            
             case('section'):
             testo('section');
             break;
+            
             case('strong'):
             testo('strong');
             break;
+            
             case('em'):
             testo('em');
             break;
-            case('input:txt'):
-            input('input:txt');
+            
+            case('input'):
+            input('input');
             break;
+            
             case('button'):
             bottone('button');
             break;
+            
             default:
                 window.alert("La selezione non è valida\nScegli uno degli elementi da generare");
         }
     }
 
-    function printTag(){
-        /**/
-        console.log(getSelectedTag());
+    function testo(tipo){
+        let t = document.getElementById('form-trgt');
+        let baseForm =' <fieldset>';
+        baseForm += '<legend>';
+        baseForm += 'crea elemento tipo '+ tipo;
+        baseForm += '</legend>';
+        baseForm += '<label for="input-id">ID del tag ' + tipo +'</label>';
+        baseForm += '<input type="text" name="id" id="input-id" placeholder="id del tag"><br>';
+        if(tipo == 'h'){
+            baseForm += '<input type="range" name="headers" id="h-num" max="6" min="1">'
+        }
+        baseForm += '<label for="input-text">testo dentro a '+tipo+'</label>';
+        baseForm += '<input type="text" id="testo" placeholder="testo di '+ tipo + '"><br>';
+        baseForm += '<button id="crea-tag" onclick="creaTagTxt(' +'\''+ tipo +'\''+ ');">Crea Tag</button>';
+        baseForm += '</fieldset>';
+        baseForm += '<div id="text-tag"></div>'
+        t.innerHTML = baseForm;
     }
+
+    function addId(str){
+        /*aggiunge l'id se è stato inserito*/
+        if(document.getElementById("input-id").value != ''){
+            str += ' id="' + document.getElementById("input-id").value + '"';
+        }
+        return str
+    }
+
+    function showTag(str){
+        /*prende la stringa e la mette dentro a un textarea per poterla copiare*/
+        let txtBox = '<textarea name="result" id="finish-tag" cols="80" rows="5">';
+        txtBox += str;
+        txtBox += '</textarea>';
+        document.getElementById("text-tag").innerHTML = txtBox;     
+    }
+
+    function creaTagTxt(tagName){
+        /*compone il tag testuale con i valori inseriti 
+        crea textarea per mostrare il tag*/
+        let str = '<' + tagName;
+
+        //aggiungo il numero per i titoli
+        if(tagName == 'h'){
+            str += document.getElementById("h-num").value;
+        }
+        //aggiunge id se presente
+        addId(str);
+        str += '>' + document.getElementById("testo").value + '</'+tagName;
+        
+        //aggiungo il numero per i titoli
+        if (tagName == 'h'){
+            str += document.getElementById("h-num").value;
+        }
+
+        str += '>';
+        console.log(str);
+        showTag(str);
+    }
+
+    function lista(tipo){
+        let form =' <fieldset>';
+        form += '<legend>';
+        form += 'crea elemento tipo '+ tipo;
+        form += '</legend>';
+        form += '<label for="input-id">ID del tag ' + tipo +'</label>';
+        form += '<input type="text" name="id" id="input-id" placeholder="id del tag"><br>';
+        form += '<textarea name="lista" id="li-list" cols="30" rows="10" placeholder="inserire gli elementi della lista separati da ;"></textarea>'        
+        form += '<button id="crea-tag" onclick="creaTagList(' +'\''+ tipo +'\''+ ');">Crea Tag</button>';
+        form += '</fieldset>';
+        form += '<div id="text-tag"></div>'
+             
+        let t = document.getElementById('form-trgt');
+        t.innerHTML = form;
+    }
+
+    function creaTagList(l){
+        let str = '<';
+        str += l;
+        addId(str);
+        str += '>';
+        let elementi = document.getElementById("li-list").value.split(';'); //array con gli elementi della lista
+        //aggiungo i tag li con il loro contenuto
+        for(let i = 0; i < elementi.length; i++){
+            if(elementi[i] !== ''){
+                str += '\n<li>';
+                str += elementi[i];
+                str += '</li>\n';
+            }
+        }
+        str += '</';
+        str += l;
+        str += '>';
+
+        showTag(str);
+    }
+
+    function immagine(){
+        let form =' <fieldset>';
+        form += '<legend>';
+        form += 'crea elemento tipo immagine';
+        form += '</legend>';
+        form += '<label for="input-id">ID del tag </label>';
+        form += '<input type="text" name="id" id="input-id" placeholder="id del tag"><br>';
+        form += '<label for="input-alt">Testo alternativo</label>';
+        form += '<input type="text" name="alt" id="input-alt" placeholder="testo alternativo"><br>';
+        form += '<label for="input-src">Percorso Immagine o URL</label>';
+        form += '<input type="text" name="src" id="input-src" placeholder="percorso dell\'immagine"><br>';
+        form += '<button id="crea-tag" onclick="creaTagImg();">Crea Tag</button>';
+        form += '</fieldset>';
+        form += '<div id="text-tag"></div>'
+             
+        let t = document.getElementById('form-trgt');
+        t.innerHTML = form;
+    }
+
+    function creaTagImg(){
+        let str = '<img';
+    }
+    /*
+ciao;
+salve;
+buongiorno;
+    */
+    /*
+    sarebbe carino fare un bottone copy to clipboard
+    https://www.w3schools.com/howto/howto_js_copy_clipboard.asp
+    */
 
 </script>
 </html>
+
+
