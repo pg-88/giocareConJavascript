@@ -22,13 +22,16 @@
 </body>
 <script>
     function attivaBtn(){
-        console.log('document.getElementById("righe").value', document.getElementById("righe").value);
-        if(document.getElementById("righe").value != 0 && document.getElementById("colonne").value != 0){
+        /*attiva il bottone crea solo se input è maggiore di 0*/
+        //console.log('document.getElementById("righe").value', document.getElementById("righe").value);
+        if(document.getElementById("righe").value > 0 && document.getElementById("colonne").value > 0){
             document.getElementById("crea-btn").disabled = false;
         }
     }
 
     function creaTabella(){
+        /*Prende dalla pagine num righe colonne, crea la stringa html.
+        poi invoca le fz per mostrare output*/
         let righe = document.getElementById("righe").value;
         let colonne = document.getElementById("colonne").value;
 
@@ -48,7 +51,8 @@
     }
 
     function showTag(str){
-        /*prende la stringa e la mette dentro a un textarea per poterla copiare*/
+        /*prende la stringa e la mette dentro a un textarea per poterla copiare
+        crea il div per introdurre html preview*/
         let txtBox = '<label for="finish-tag">Row HTML</label><br>';
         txtBox += '<textarea name="result" id="finish-tag" cols="80" rows="5">';
         txtBox += str;
@@ -59,6 +63,7 @@
     }
 
     function showHtml(str){
+        /*inserisce html preview*/
         document.getElementById("html-trgt").innerHTML = str;
     }
 

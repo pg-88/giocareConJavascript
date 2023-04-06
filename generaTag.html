@@ -132,8 +132,10 @@
     function showHtml(str){
         document.getElementById("html-trgt").innerHTML = str;
     }
+
     function showTag(str){
-        /*prende la stringa e la mette dentro a un textarea per poterla copiare*/
+        /*prende la stringa e la mette dentro a un textarea per poterla copiare
+        mostra anche la preview html*/
         let txtBox = '<label for="finish-tag">Row HTML</label><br>';
         txtBox = '<textarea name="result" id="finish-tag" cols="80" rows="5">';
         txtBox += str;
@@ -158,18 +160,20 @@
         //aggiunge id se presente
         str += addId();
         str += '>' + document.getElementById("testo").value + '</'+tagName;
-        
+
         //aggiungo il numero per i titoli
         if (tagName == 'h'){
             str += document.getElementById("h-num").value;
         }
 
         str += '>';
-        console.log(str);
+        //console.log(str);
+        
         showTag(str);
     }
 
     function lista(tipo){
+        /*crea form per input lista*/
         let form =' <fieldset>';
         form += '<legend>';
         form += 'crea elemento tipo '+ tipo;
@@ -186,6 +190,7 @@
     }
 
     function creaTagList(l){
+        /*compone la stringa per il tag lista*/
         let str = '<';
         str += l;
         str += addId();
@@ -193,17 +198,19 @@
         let elementi = document.getElementById("li-list").value.split(';'); //array con gli elementi della lista
         //aggiungo i tag li con il loro contenuto
         for(let i = 0; i < elementi.length; i++){
-            if(elementi[i] !== ''){
+            if(elementi[i]  !== ''){
                 str += '\n<li>';
                 str += elementi[i];
                 str += '</li>\n';
             }
         }
+
         str += '</';
         str += l;
         str += '>';
 
         showTag(str);
+
     }
 
     function immagine(){
