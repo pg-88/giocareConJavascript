@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>table it's fun!</title>
+</head>
+<body>
+    <fieldset>
+        <legend>
+            tabelle tabelle tabelle!!!
+        </legend>
+        <label for="righe">Numero Righe</label>
+        <input type="number" name="" id="righe" min="0" size="5">
+        <label for="colonne">Numero Colonne</label>
+        <input type="number" name="" id="colonne" min="0" size="5" onchange="attivaBtn()">
+        <button id="crea-btn" disabled="disabled" onclick="creaTabella()">Crea</button>
+    </fieldset>
+
+    <div id="tab-trgt"></div>
+</body>
+<script>
+    function attivaBtn(){
+        console.log('document.getElementById("righe").value', document.getElementById("righe").value);
+        if(document.getElementById("righe").value != 0 && document.getElementById("colonne").value != 0){
+            document.getElementById("crea-btn").disabled = false;
+        }
+    }
+
+    function creaTabella(){
+        let righe = document.getElementById("righe").value;
+        let colonne = document.getElementById("colonne").value;
+
+        let htstr = '<table>\n';
+        for (let i = 0; i < righe; i++){
+            htstr += '<tr>\n';
+            for (let j = 0; j < colonne; j++ ){
+                htstr += '<td style="border: solid;">';
+                htstr += 'cella ' + i.toString() + '-' + j.toString();
+                htstr += '</td>\n'
+            }
+            htstr += '</tr>';
+        }
+        htstr += '</table>'
+        showTag(htstr);
+        showHtml(htstr);
+    }
+
+    function showTag(str){
+        /*prende la stringa e la mette dentro a un textarea per poterla copiare*/
+        let txtBox = '<label for="finish-tag">Row HTML</label><br>';
+        txtBox += '<textarea name="result" id="finish-tag" cols="80" rows="5">';
+        txtBox += str;
+        txtBox += '</textarea>\n <br>';
+        txtBox += '<label for="html-trgt">Tabella finita:</label>';
+        txtBox += '<br><div id="html-trgt"></div>\n';
+        document.getElementById("tab-trgt").innerHTML = txtBox;     
+    }
+
+    function showHtml(str){
+        document.getElementById("html-trgt").innerHTML = str;
+    }
+
+</script>
+</html>

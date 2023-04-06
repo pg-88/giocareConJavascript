@@ -10,6 +10,7 @@ Esercizi fatti a lezione e vaneggiamenti personali...
   - [Bottoni nella lista](#bottoni-nella-lista)
   - [Appunti martedì 4 aprile](#appunti-martedì-4-aprile)
   - [Esercizi assegnati martedì](#esercizi-assegnati-martedì)
+  - [Esercizi Svolti](#esercizi-svolti)
 ----
 ### Esercizio ven 31 marzo
 
@@ -45,9 +46,18 @@ Esercizi fatti a lezione e vaneggiamenti personali...
   
 [appunti e codice a lezione](mar04apr.html)
 
+----
+
 ### Esercizi assegnati martedì
 
 [file html](homework_04_aprile.html)
 
 ![foto](img/homework0404.jpg)
+
+### Esercizi Svolti
+
+- [esercizio tag html](generaTag.html) risolto usando switch-case e un select option in html.
+- [esercizio tabella](tabella.html) risolto con ciclo for dentro ciclo for, riutilizzate alcune fz di genera tag.
+- [elimina ultimo elemento lista](bottoneElimina.html) era già fatto
+
  

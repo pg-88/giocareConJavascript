@@ -117,20 +117,33 @@
         t.innerHTML = baseForm;
     }
 
-    function addId(str){
+    function addId(){
+        let id = '';
         /*aggiunge l'id se è stato inserito*/
+        console.log(document.getElementById("input-id").value );
+        
         if(document.getElementById("input-id").value != ''){
-            str += ' id="' + document.getElementById("input-id").value + '"';
+            id = ' id="' + document.getElementById("input-id").value + '"';
+            console.log('add id str: ', id);
         }
-        return str
+        return id;
     }
 
+    function showHtml(str){
+        document.getElementById("html-trgt").innerHTML = str;
+    }
     function showTag(str){
         /*prende la stringa e la mette dentro a un textarea per poterla copiare*/
-        let txtBox = '<textarea name="result" id="finish-tag" cols="80" rows="5">';
+        let txtBox = '<label for="finish-tag">Row HTML</label><br>';
+        txtBox = '<textarea name="result" id="finish-tag" cols="80" rows="5">';
         txtBox += str;
         txtBox += '</textarea>';
-        document.getElementById("text-tag").innerHTML = txtBox;     
+        txtBox += '<br><label for="html-trgt">Risultato HTML</label><br>';
+        txtBox += '<br><div id="html-trgt"></div>'
+        document.getElementById("text-tag").innerHTML = txtBox;
+
+        showHtml(str);
+
     }
 
     function creaTagTxt(tagName){
@@ -143,7 +156,7 @@
             str += document.getElementById("h-num").value;
         }
         //aggiunge id se presente
-        addId(str);
+        str += addId();
         str += '>' + document.getElementById("testo").value + '</'+tagName;
         
         //aggiungo il numero per i titoli
@@ -163,7 +176,7 @@
         form += '</legend>';
         form += '<label for="input-id">ID del tag ' + tipo +'</label>';
         form += '<input type="text" name="id" id="input-id" placeholder="id del tag"><br>';
-        form += '<textarea name="lista" id="li-list" cols="30" rows="10" placeholder="inserire gli elementi della lista separati da ;"></textarea>'        
+        form += '<textarea name="lista" id="li-list" cols="30" rows="10" placeholder="inserire gli elementi della lista separati da ;"></textarea><br>';
         form += '<button id="crea-tag" onclick="creaTagList(' +'\''+ tipo +'\''+ ');">Crea Tag</button>';
         form += '</fieldset>';
         form += '<div id="text-tag"></div>'
@@ -175,7 +188,7 @@
     function creaTagList(l){
         let str = '<';
         str += l;
-        addId(str);
+        str += addId();
         str += '>';
         let elementi = document.getElementById("li-list").value.split(';'); //array con gli elementi della lista
         //aggiungo i tag li con il loro contenuto
@@ -214,6 +227,13 @@
 
     function creaTagImg(){
         let str = '<img';
+        str += addId();// aggiunge id se c'è 
+        str += 'src="';
+        str += document.getElementById("input-src").value;
+        str += '" alt="';
+        str += document.getElementById("input-alt").value;
+        str += '" >'
+        showTag(str);
     }
     /*
 ciao;
@@ -227,5 +247,3 @@ buongiorno;
 
 </script>
 </html>
-
-
