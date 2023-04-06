@@ -107,9 +107,10 @@
         baseForm += '<label for="input-id">ID del tag ' + tipo +'</label>';
         baseForm += '<input type="text" name="id" id="input-id" placeholder="id del tag"><br>';
         if(tipo == 'h'){
-            baseForm += '<input type="range" name="headers" id="h-num" max="6" min="1">'
+            baseForm += '<br><label for="h-num">Livello del titolo da 1 a 6:</label>';
+            baseForm += '<input type="number" name="headers" id="h-num" max="6" min="1" ><br>'
         }
-        baseForm += '<label for="input-text">testo dentro a '+tipo+'</label>';
+        baseForm += '<br><label for="input-text">testo dentro a '+tipo+'</label>';
         baseForm += '<input type="text" id="testo" placeholder="testo di '+ tipo + '"><br>';
         baseForm += '<button id="crea-tag" onclick="creaTagTxt(' +'\''+ tipo +'\''+ ');">Crea Tag</button>';
         baseForm += '</fieldset>';
@@ -199,7 +200,7 @@
         //aggiungo i tag li con il loro contenuto
         for(let i = 0; i < elementi.length; i++){
             if(elementi[i]  !== ''){
-                str += '\n<li>';
+                str += '\n<li>';1
                 str += elementi[i];
                 str += '</li>\n';
             }

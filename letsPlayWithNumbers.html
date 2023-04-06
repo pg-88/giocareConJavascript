@@ -4,15 +4,71 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Numri</title>
+    <title>Numeri</title>
 </head>
-<body onclick="avvio()">
-    
+<body>
+    <main>
+        <h1>
+            Giochiamo con i numeri Interi (e gli array)!
+        </h1>
+        <hr>
+        <br>
+        <fieldset>
+            <legend>Crea la lista di numeri interi lunga quanto vuoi!</legend>
+            <br>
+            <label for="max">
+                Numero massimo nella lista:  <br>
+            </label>
+            <input type="number" name="" min="0" max="10" id="max" value="0">
+            <br>
+            <button id="btn-crea" onclick="mostraArr()">Crea Array</button>
+        </fieldset>
+        <div id="array"></div>
+        <button onclick="trovaPerfetti()">Numeri Perfetti</button>
+    </main>   
 </body>
 <script>
-    function avvio(){
+    function mostraArr(){
+        let t = document.getElementById("array");
+        let numIn = document.getElementById("max");
+        let n = creaArr(numIn.value); //genera l'array e lo mette in n (naturali)
+        t.innerHTML = n.toString();
+        /*for (let i = 0; i < n.length; i++){
+            console.log('array ', i, 'valore ', n[i])
+        }*/
+    }
 
-        
+    function creaArr(maxVal){
+        // console.log(maxVal);
+        let arr = [];
+        for(let i = 0; i <= maxVal; i++){
+            arr.push(i);
+        }
+        return arr;
+    }
+
+    function arrFromHt(idDiv){
+        return document.getElementById(idDiv).innerHTML.split(',');
+    }
+
+    function trovaPerfetti(){
+        /*trova i divisori e li somma*/
+        let arr = arrFromHt("array");
+        //console.log('stringa array', strArr);
+        let perfetti = [];
+        for(let i = 0; i < arr.length; i++){
+            let sommaDivisori = 0;
+            for (let j = 0; j < arr[i]; j++){
+                //console.log("controllo se il numero ", arr[i], " è divisibile per ", j);
+                if(arr[i] % j == 0){
+                    sommaDivisori += j;
+                }
+            if(sommaDivisori == arr[i]){
+                console.log("somma Divisori", sommaDivisori, "\nNumero controllato", arr[i])
+            }
+        }
+        }
+        return perfetti;
     }
 </script>
 </html>
