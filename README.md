@@ -11,6 +11,7 @@ Esercizi fatti a lezione e vaneggiamenti personali...
   - [Appunti martedì 4 aprile](#appunti-martedì-4-aprile)
   - [Esercizi assegnati martedì](#esercizi-assegnati-martedì)
   - [Esercizi Svolti il 05 Aprile](#esercizi-svolti-il-05-aprile)
+  - [Finito Lista immagini](#finito-lista-immagini)
 ----
 ### Esercizio ven 31 marzo
 
@@ -37,7 +38,7 @@ Esercizi fatti a lezione e vaneggiamenti personali...
 ----
 ----
 ### Bottoni nella lista
-- [bottoniinlista](bottoniInLista.html) work in progress.....
+- [bottoniinlista](bottoniInLista.html) non l'ho completato. Vedi [listaImmagini.html](listaImmagini.html) per la versione definitiva.
 ----
 ### Appunti martedì 4 aprile
 **Ricorda:**
@@ -60,3 +61,7 @@ Esercizi fatti a lezione e vaneggiamenti personali...
 - [esercizio tabella](tabella.html) risolto con ciclo for dentro ciclo for, riutilizzate alcune fz di genera tag.
 - [elimina ultimo elemento lista](bottoneElimina.html) era già fatto
 - [esercizio con array e numeri interi](./letsPlayWithNumbers.html) in realtà ho scritto una fz per cercare i numeri perfetti. ([numeri perfetti wikipedia](https://it.wikipedia.org/wiki/Numero_perfetto))
+
+### Finito Lista immagini
+[Definitiva](listaImmagini.html), non intendo aggiungere altro a questo esercizio.
+Esercizio utile per ricordarsi come usare i vari metodi per creare, appendere, modificare gli oggetti HTML in uno script JS. 

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Definitivo Lista Immagini</title>
+</head>
+<body onload="avvio()">
+    
+</body>
+
+<script>
+    function avvio(){
+        /*generazione elementi della pagina, chiamate delle funzioni principali*/
+        //genera elementi
+        let main = document.createElement("main");
+        let title = document.createElement("h1");
+        let lbl = document.createElement("label");
+        let inputFile = document.createElement("input");
+        let listContainer = document.createElement("section");
+        let list = document.createElement("ul");
+
+        //collega gli elementi 
+        console.log(title, lbl, inputFile, listContainer, list);
+        document.body.appendChild(main);
+        main.appendChild(title, lbl, inputFile, listContainer, list);
+        title.after(lbl, inputFile, listContainer, list);
+
+        //completo gli elementi 
+        main.id = "principale";
+        
+        title.id = "titolo";
+        title.innerHTML = "Lista di immagini";
+        
+        lbl.for = "in-file";
+        lbl.innerHTML = "Inserisci i files"
+
+        inputFile.id = "in-file";
+        inputFile.type = "file";
+        inputFile.multiple = true;
+        //definisco l'event handler gestisciFile che è una funzione ma non devo
+        //usare le parentesi per chiamarla, la sto solo collegando all'evento
+        inputFile.addEventListener("change", gestisciFile)
+        //addEventListner è un metodo degli oggetti html prende il nome dell'evento
+        //come stringa e il secondo parametro è il nome della funzione (senza 
+        //invocarla). La funzione è definita fuori da questo blocco di codice ma
+        //poteva stare qui con la arrow function.
+
+        listContainer.id = "trgt-lst";
+        list.id = "lst";
+
+    }
+
+    function gestisciFile(e){
+        /*chiamata all'affiorare dell'evento change dell'input file
+        di default si porta con sè l'oggetto html che ha generato l'evento
+        che può essere richiamato con la parola chiave this*/
+        console.log('passato dall\'evento', e);
+    }
+</script>
+</html>

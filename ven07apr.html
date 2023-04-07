@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="text/javascript" src="./src/main.js"></script>
+
+    <title>venerd&iacute; 07 aprile Appunti</title>
+</head>
+<body>
+    <h1>Javascript nel Web</h1>
+    <main accesskey="m">
+        <h3>
+            Javascript in file esterni
+        </h3>
+        <section id="js-non-sta-con-html" >
+            <h4>Js non sta con html</h4>
+        L'idea è sempre quella di suddividere le parti del programma in funzione dei loro compiti. <br>
+        Nel caso di Javascript abbiamo sempre inserito il codice nella pagina html ma è possibile importare 
+        il codice da files esterni di tipo js (nel caso di javascript). <wbr>
+        L'importazone dei files di codice si fa passando un attributo src al tag script, 
+        è buona pratica indicare anche l'attributo type per chiarire nel browser che di codice si sta caricando.
+        <code><xmp><script type="text/javascript" src="script/main.js"></script></xmp></code> 
+        il tag script può essere messo ovunque nella pagina ma se importo librerie di funzioni, conviene importare nell'head <wbr>
+        in modo da avere la possibilit&agrave; di richiamarle in qualsiasi punto della pagina.
+        </section>
+        <section id="eventi">
+            <h4>Eventi</h4>
+            <strong>Qualsiasi tag pu&ograve; subire degli eventi e quindi innescare delle funzioni, se è stata predisposta per quel particolare evento.</strong>
+            Gli eventi sono moltissimi e si possono trovare sulle reference, come ad esempio
+            <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event" target="_blank">mdn web docs &#128153;</a>. <br>
+            Gli eventi pi&uacute; usati sono ovviamente "onclick", "onload", "onchange". C'&eacute; un particolare uso dell'evento onsubmit che pu&ograve; venire molto 
+            utile nei moduli: <br>
+            <aside>
+                nei tag form posso controllare i dati prima del submit, mandando a una fz js ("valida()" che ritorna un booleano). Questo, anzich&eacute; mandare <wbr>
+                immediatamente i dati pescati dal form all'action (quindi al server), esegue la fz e manda i dati solo se valida ritora true
+                la sintassi è quella di <code>onsubmit="<em>return</em> validazione()"</code> la funzione 
+            </aside>
+            
+        </section>
+
+        <section id="dom">
+            <h4>
+                DOM e i suoi metodi
+            </h4>
+
+            Gli elementi html sono oggetti nel cotesto della <strong>D</strong>ocument <strong>O</strong>bject <strong>M</strong>odel e, dal momento che la 
+            DOM è strutturata come un albero 
+            <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model" target="_blank"><img src="img/dom.jpg" alt="link a mdn DOM" width="100"></a>, 
+            questi oggetti sono anche dei nodi.
+            I metodi del document sono quelli che permettono di accedere ai nodi (getElementBy*),creare nodi (createElement) e inserirli all'interno della struttura ad albero 
+            (insertElement, insertNode,...) 
+            
+
+            Perch&eacute; usare <code>innerHTML</code>?
+            <ul>
+                <li>pu&ograve; risultare più rapido perch&eacute; modifica l'albero una sola volta </li>
+                <li>per&ograve; in serendo con innerHTML non si pu&ograve; modificare l'oggetto html perch&egrave; non è un oggetto finché non viene inserito nella struttura</li>
+            </ul>
+        </section>
+        
+    </main>
+
+    <button id="main-changer" accesskey="g" onclick="getMain()"><u><strong> g</strong></u>etMain</button>
+    
+</body>
+</html>
