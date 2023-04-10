@@ -12,6 +12,7 @@
 </body>
 
 <script>
+    
     function avvio(){
         /*generazione elementi della pagina, chiamate delle funzioni principali*/
         //genera elementi
@@ -23,7 +24,7 @@
         let list = document.createElement("ul");
 
         //collega gli elementi 
-        console.log(title, lbl, inputFile, listContainer, list);
+        //console.log(title, lbl, inputFile, listContainer, list);
         document.body.appendChild(main);
         main.appendChild(title);
         title.after(lbl, inputFile, listContainer, list);
@@ -98,30 +99,31 @@
         document.body.lastElementChild.after(trgtImg);//inserisce il target dopo li'ultimo
 
         let selected = this.files;
-        console.log("files: ", selected, "\nFile: ", selected[0]);
+        //console.log("files: ", selected, "\nFile: ", selected[0]);
 
         //ciclo tre i files caricati (multiple attr)
-        for (let im = 0; im < selected.length; im++){
-            //creo elemento html
-            const pic = document.createElement('img');
-            pic.width = '200';
-            trgtImg.appendChild(pic)
+        for (let im = 0;im < selected.length; im++){
             //Per poter passare il file al source di img devo prima digerirlo (leggerlo) e trasformarlo in 
             //url binario
             let imgFile = new FileReader();
             //al caricamento del reader devo gestire il reader per assegnare a src
             //la stringa binaria con l'immagine. Devo farlo qui non posso separare le 
             //fz perché non ho modo di passare il parametro e tornarlo dall'handler
-            imgFile.onload = function() {
-                pic.src = this.result;
-            };
+            imgFile.onload = inserisciFoto;
             console.log(selected[im], "tipo",typeof(selected[im]))
             imgFile.readAsDataURL(selected[im]);
 
-            pic.id = selected[im].name;
-            pic.alt = selected[im].name; //potrebbe non essere ottimale per l'accessibilità
         }
 
+    }
+
+    function inserisciFoto(){
+        let foto = document.createElement('img');
+        let readed = this.result;
+
+        foto.src = readed;
+        foto.width= "200";
+        document.getElementById('trgt-img').append(foto);
     }
 
 </script>
