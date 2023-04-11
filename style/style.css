@@ -1,0 +1,35 @@
+* {
+    font-family: monospace;
+    background-color: rgb(33, 46, 38);
+    color: #C9A445;
+}
+
+*::selection{
+    color: #C9A445;
+}
+
+h1  {
+    font-size: 4em;
+}
+
+h1 em {
+    color: #86376D;
+    font-style: normal;
+}
+
+h1:hover {
+    color: #86376D;
+}
+
+em:hover {
+    color: #577A6F;
+}
+
+#file-upload-button {
+    color: red;
+} 
+
+input#in-file button {
+    color: green;
+    background-color: gold;
+}
