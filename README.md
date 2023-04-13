@@ -12,6 +12,8 @@ Esercizi fatti a lezione e vaneggiamenti personali...
   - [Esercizi assegnati martedì](#esercizi-assegnati-martedì)
   - [Esercizi Svolti il 05 Aprile](#esercizi-svolti-il-05-aprile)
   - [Finito Lista immagini](#finito-lista-immagini)
+  - [Appunti venerdì 7 Aprile](#appunti-venerdì-7-aprile)
+  - [Prova Sommativa 12 Aprile](#prova-sommativa-12-aprile)
 ----
 ### Esercizio ven 31 marzo
 
@@ -45,7 +47,7 @@ Esercizi fatti a lezione e vaneggiamenti personali...
 - verifica *seria* mercoledì 12 aprile
 - per lo stage inviare ad Elia su Whatsapp no mail le aziende di interesse o rispondere al sondaggio sul gruppo.
   
-[appunti e codice a lezione](mar04apr.html)
+[appunti e codice a lezione](appunti/mar04apr.html)
 
 ----
 
@@ -65,3 +67,17 @@ Esercizi fatti a lezione e vaneggiamenti personali...
 ### Finito Lista immagini
 [Definitiva](listaImmagini.html), non intendo aggiungere altro a questo esercizio.
 Esercizio utile per ricordarsi come usare i vari metodi per creare, appendere, modificare gli oggetti HTML in uno script JS. 
+
+### Appunti venerdì 7 Aprile
+
+- javascript in files esterni
+- Eventi DOM
+- Metodi DOM 
+
+### Prova Sommativa 12 Aprile 
+- quello che ho consegnato 
+  - [index](./index12Aprile.html)
+  - [style](./style/style_table.css)
+  - [javascript](./src/tabella.js)
+
+- modifiche fatte dopo

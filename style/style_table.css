@@ -1,0 +1,24 @@
+* {
+    font-family: monospace;
+    font-size: 15px;
+    margin: 5px;
+}
+
+#tabella {
+    text-align: center;
+
+}
+
+thead {
+background-color: rgb(12 140 140);
+
+}
+
+
+tr:nth-child(even) {
+background-color: #d1e2dc;
+}
+
+tr:hover {
+background-color: #85a31e;
+}
