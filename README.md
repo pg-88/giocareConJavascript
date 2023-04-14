@@ -76,8 +76,10 @@ Esercizio utile per ricordarsi come usare i vari metodi per creare, appendere, m
 
 ### Prova Sommativa 12 Aprile 
 - quello che ho consegnato 
-  - [index](./index12Aprile.html)
+  - [html](./index12Aprile.html)
   - [style](./style/style_table.css)
   - [javascript](./src/tabella.js)
 
 - modifiche fatte dopo
+  - [html](./tableFrontend.html)
+  - 
